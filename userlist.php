@@ -14,6 +14,13 @@ include 'connection.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
+    
+    
+    <form action="search_query.php" id="" method="POST"> 
+  <input type="search" id="query" name="user_name" placeholder="Search...">
+  <input type="submit" name="search" value="Search">
+  </form>
+    
      <div class="container">
      <table class="table">
   <thead>
