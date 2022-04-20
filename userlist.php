@@ -4,7 +4,6 @@ include 'connection.php';
 ?>
 
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,19 +14,35 @@ include 'connection.php';
 </head>
 <body>
     
-    
-    <form action="search_query.php" id="" method="POST"> 
+<?php
+$records = mysqli_query($conn,"SELECT count(*) FROM tbluser ORDER BY id ASC");
+$row_db = mysqli_fetch_row($records);
+$total_records = $row_db[0];
+?>
+     
+    <div>
+  <form action="search_query.php" id="" method="POST"> 
   <input type="search" id="query" name="user_name" placeholder="Search...">
   <input type="submit" name="search" value="Search">
   </form>
+    </div>
     
+    
+    <div>
      <div class="container">
+     
+   <table class="table table-bordered table-striped">
+<tr>
+<td><h1>Total Number of records </h1></td>
+<td><h1><?php echo $total_records; ?></h1></td>
+</tr>
+</table>
      <table class="table">
   <thead>
     <tr>
       <th scope="col">SL No</th>
-      <th scope="col">FirstName</th>
-      <th scope="col">LastName</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
       <th scope="col">Gender</th>
       <th scope="col">Email</th>
       <th scope="col">Password</th>
@@ -36,11 +51,19 @@ include 'connection.php';
   </thead>
   <tbody>
   <?php
-
+   $numberOfRecordsPerPage = 5;   
+   if (isset($_GET["page"])) {
+  $page  = $_GET["page"];
+  }
+  else{
+  $page=1;
+  }
+   $start_page = ($page-1) * $numberOfRecordsPerPage;
+   $result = mysqli_query($conn,"SELECT * FROM tbluser ORDER BY id ASC LIMIT $start_page, $numberOfRecordsPerPage");
     
-   $sql="SELECT * FROM `tbluser`";
+   //$sql="SELECT * FROM `tbluser`";
 
-   $result=mysqli_query($conn,$sql);
+   //$result=mysqli_query($conn,$sql);
    if($result){
       
     while( $row=mysqli_fetch_assoc($result)){
@@ -70,7 +93,35 @@ include 'connection.php';
 
   </tbody>
 </table>
+       
+   <div class="pagination-drop">
+  
+       <div class="pageLink"> 
+ <?php
+
+$total_pages = ceil($total_records/ $numberOfRecordsPerPage);
+$pageLink = "<ul class='pagination'>";
+for ($i=1; $i<=$total_pages; $i++) {
+$pageLink .= "<li class='page-item'><a class='page-link' href='userlist.php?page=".$i."'>".$i."</a></li>";
+}
+echo $pageLink; "</ul>";
+?>
+  
      </div>
+    <div class="dropdown">
+  <button class="dropbtn">Select</button>
+  <div class="dropdown-content">
+    
+    <a href="#">10</a>
+    <a href="#">20</a>
+  </div>
+</div>
+  </div>
+         
+         
+   </div>
+    </div>
+   
 </body>
 </html>
 
