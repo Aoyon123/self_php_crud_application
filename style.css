@@ -74,6 +74,133 @@ a:hover {
   }
 }
 
+
+
+
+
+
+/************* table style ********/
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+/*************** pagination page css *************/
+
+.pagination-drop{
+    display: flex;
+    gap-between: 10px;
+    
+}
+
+.dropdown{
+    margin-left: 30px;
+}
+
+
+
+.pagination {
+display: -webkit-box !important;
+display: -ms-flexbox !important;
+display: flex !important ;
+padding-left: 0 !important ;
+list-style: none !important;
+border-radius: .25rem !important;
+}
+
+.pagination2 .page-item{
+padding: 8px !important;
+border: #259dc7 1px solid !important;
+margin: 11px !important;
+background: lightblue !important;
+color: white !important;
+}
+.page-item a{
+text-decoration: none !important;
+font-weight: bold !important;
+color: red !important;
+font-size: 20px !important;
+}
+.table{
+background: #cf8686 !important;
+color: #0d0d0d !important;
+margin-bottom: 10px !important;
+border: green 2px solid !important;
+}
+.table th{
+background: #666699 !important;
+padding: 5px !important;
+font-size: 22px !important;
+}
+
+
+
+/******************* Drop down button ***********/
+
+.dropbtn {
+  background-color: #04AA6D !important;
+  color: white !important;
+  padding: 16px !important;
+  font-size: 16px !important;
+  border: none !important;
+}
+
+.dropdown {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.dropdown-content {
+  display: none !important;
+  position: absolute !important;
+  background-color: #c7c7c7 !important;
+  min-width: 160px !important;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2) !important;
+  z-index: 1 !important;
+}
+
+.dropdown-content a {
+  color: black !important;
+  padding: 12px 16px !important;
+  text-decoration: none !important;
+  display: block !important;
+}
+
+.dropdown-content a:hover {background-color: #c7c7c7 !important;}
+
+.dropdown:hover .dropdown-content {display: block !important;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41 !important;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*******   Footer part ******/
 
 .footer-container {
