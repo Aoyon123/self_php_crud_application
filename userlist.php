@@ -113,18 +113,42 @@ include 'connection.php';
                     <div class="pageLink"> 
                         <?php
 
-                  echo "<a href='userlist.php?page=$get_page_decrement'>
-                  <span class='bg-dark'><</span></a>";
+                  //echo "<a href='userlist.php?page=$get_page_decrement'>
+                 // <span class='bg-dark'><</span></a>";
 
+                  if($get_page_decrement<1){
+                      echo "<";
+                  }
+                else {
+                    echo "<a href='userlist.php?page=$get_page_decrement'>
+                    <span class='bg-dark'><</span></a>";
+                }
+                       
 
-                        $total_pages = ceil($total_records / $numberOfRecordsPerPage);
+              $total_pages = ceil($total_records / $numberOfRecordsPerPage);
                         $pageLink = "<ul class='pagination'>";
                         for ($i = 1; $i <= $total_pages; $i++) {
                             ?>
                             <li class='page-item'><a class='page-link' href='userlist.php?page=<?php echo $i ?>&page_limit=<?php echo $numberOfRecordsPerPage; ?>'> <?php echo $i ?></a></li>
+
                             <?php
+                            
                         }
                         "</ul>";
+                       // echo "<a href='userlist.php?page=$get_page_increment'>
+                       // <span class='bg-dark'>></span></a>";
+                       
+
+                        if($get_page_increment>$total_pages){
+                            echo "<";
+                        }
+                      else {
+                          echo "<a href='userlist.php?page=$get_page_increment'>
+                          <span class='bg-dark'>></span></a>";
+                      }
+
+
+
                         ?>
                     </div>
                     
