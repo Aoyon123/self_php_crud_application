@@ -50,19 +50,26 @@ include 'connection.php';
                         </tr>
                     </thead>
                     <tbody>
+
+            
                         <?php
+                    // for get the current page number
                         if (isset($_GET["page"])) {
                             $page = $_GET["page"];
                         } else {
                             $page = 1;
                         }
+                    
+                     $get_page_decrement=$page-1;
+                      $get_page_increment=$page+1;
+
+
 
                         $numberOfRecordsPerPage = !empty($_GET['page_limit']) ? $_GET['page_limit'] : 5;
 
                         if (isset($_POST['limit_submit'])) {
                             $numberOfRecordsPerPage = $_POST['choice'];
                         }
-
 
                         $start_page = ($page - 1) * $numberOfRecordsPerPage;
                         $offsetStr = !empty($start_page) ? ' offset '.$start_page : '';
@@ -105,6 +112,11 @@ include 'connection.php';
 
                     <div class="pageLink"> 
                         <?php
+
+                  echo "<a href='userlist.php?page=$get_page_decrement'>
+                  <span class='bg-dark'><</span></a>";
+
+
                         $total_pages = ceil($total_records / $numberOfRecordsPerPage);
                         $pageLink = "<ul class='pagination'>";
                         for ($i = 1; $i <= $total_pages; $i++) {
@@ -118,7 +130,7 @@ include 'connection.php';
                     
               <?php
               
-              $x=((empty($total_pages)) || ($total_pages>0 && $total_pages<=5)) ? 1:((floor()))
+             // $x=((empty($total_pages)) || ($total_pages>0 && $total_pages<=5)) ? 1:((floor(j)))
               
               
               
