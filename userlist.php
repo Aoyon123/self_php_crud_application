@@ -121,11 +121,11 @@ include 'connection.php';
                   }
                 else {
                     echo "<a href='userlist.php?page=$get_page_decrement'>
-                    <span class='bg-dark'><</span></a>";
+                    <span class='btn bg-dark text-light'><</span></a>";
                 }
                        
 
-              $total_pages = ceil($total_records / $numberOfRecordsPerPage);
+                   $total_pages = ceil($total_records / $numberOfRecordsPerPage);
                         $pageLink = "<ul class='pagination'>";
                         for ($i = 1; $i <= $total_pages; $i++) {
                             ?>
@@ -144,7 +144,7 @@ include 'connection.php';
                         }
                       else {
                           echo "<a href='userlist.php?page=$get_page_increment'>
-                          <span class='bg-dark'>></span></a>";
+                          <span class='btn bg-dark text-light'>></span></a>";
                       }
 
 
