@@ -33,7 +33,7 @@ include 'connection.php';
 
                 <table class="table table-bordered table-striped">
                     <tr>
-                        <td><h1>Total Number of records </h1></td>
+                        <td><h1>Total Number of Records </h1></td>
                         <td><h1><?php echo $total_records; ?></h1></td>
                     </tr>
                 </table>
@@ -65,7 +65,7 @@ include 'connection.php';
 
 
 
-                        $numberOfRecordsPerPage = !empty($_GET['page_limit']) ? $_GET['page_limit'] : 5;
+                        $numberOfRecordsPerPage = !empty($_GET['page_limit']) ? $_GET['page_limit'] : 3;
 
                         if (isset($_POST['limit_submit'])) {
                             $numberOfRecordsPerPage = $_POST['choice'];
@@ -89,7 +89,7 @@ include 'connection.php';
                                 $password = $row['password'];
 
                                 echo ' <tr>
-        <th scope="row">' . ++$serial . '</th>
+                  <th scope="row">' . ++$serial . '</th>
         <td>' . $firstName . '</td>
         <td>' . $lastName . '</td>
         <td>' . $gender . '</td>
@@ -111,60 +111,26 @@ include 'connection.php';
                 <div class="pagination-drop">
 
                     <div class="pageLink"> 
-                        <?php
-
-                  //echo "<a href='userlist.php?page=$get_page_decrement'>
-                 // <span class='bg-dark'><</span></a>";
-
-                  if($get_page_decrement<1){
-                      echo "<";
-                  }
-                else {
-                    echo "<a href='userlist.php?page=$get_page_decrement'>
-                    <span class='btn bg-dark text-light'><</span></a>";
-                }
-                       
-
-                   $total_pages = ceil($total_records / $numberOfRecordsPerPage);
-                        $pageLink = "<ul class='pagination'>";
-                        for ($i = 1; $i <= $total_pages; $i++) {
-                            ?>
-                            <li class='page-item'><a class='page-link' href='userlist.php?page=<?php echo $i ?>&page_limit=<?php echo $numberOfRecordsPerPage; ?>'> <?php echo $i ?></a></li>
-
-                            <?php
-                            
-                        }
-                        "</ul>";
-                       // echo "<a href='userlist.php?page=$get_page_increment'>
-                       // <span class='bg-dark'>></span></a>";
-                       
-
-                        if($get_page_increment>$total_pages){
-                            echo "<";
-                        }
-                      else {
-                          echo "<a href='userlist.php?page=$get_page_increment'>
-                          <span class='btn bg-dark text-light'>></span></a>";
-                      }
-
-
-
-                        ?>
+                        <?php  
+                         $total_pages = ceil($total_records / $numberOfRecordsPerPage);
+            //($pageno%3==0) ? $x :
+            $y2=ceil( $page / 3) * 3;
+            $x =(empty($page) || ($page>0 && $page<=3)) ? 1 : (($page>3 && $page%3==0) ? ($page-2) : (floor($page/3)*3)+1);
+            $y = (empty($page) || ($page>0 && $page<=3)) ? ($total_pages < 3 ? $total_pages : 3) : ($total_pages < $y2 ? $total_pages : $y2);
+            echo $x>1 ?  '<a href="userlist.php?page=1&numberOfRecordsPerPage='. $numberOfRecordsPerPage.'"><button class="class="btn btn-success">Fast-Backword</button></a>' : '';
+            echo $x>1 ?  '<a href="userlist.php?page='. ($x-1) .'&numberOfRecordsPerPage='. $numberOfRecordsPerPage.'"><button class="btn btn-success">Prev</button></a>' : '';
+            for($i=$x;$i<=$y;$i++)
+            {   
+               echo '<a class="pageLink page-item" href="userlist.php?page='. $i .'&numberOfRecordsPerPage='. $numberOfRecordsPerPage .'"><button class="btn btn-success">'. $i .'</button></a>';
+            } 
+            echo $y<$total_pages ?'<a  href="userlist.php?page='. ($y+1) .'&numberOfRecordsPerPage= '. $numberOfRecordsPerPage.'"><button class="btn btn-success">Next</button></a>' : '';
+            echo $y<$total_pages ?'<a href="userlist.php?page='. ($total_pages) .'&numberOfRecordsPerPage= '. $numberOfRecordsPerPage.'"><button class="btn btn-success">Fast-Forward</button></a>' : '';
+            
+            ?>
+                    
                     </div>
                     
-              <?php
-              
-             // $x=((empty($total_pages)) || ($total_pages>0 && $total_pages<=5)) ? 1:((floor(j)))
-              
-              
-              
-              
-              
-              
-              ?>
-                    
-                    
-                    
+
                     <div class="option-select">
                         <form method="post" action="">
                             <select class=""  name="choice">
@@ -181,8 +147,10 @@ include 'connection.php';
             </div>
         </div>
         <style>
-            
             .pageLink{
+            display:flex;
+            }
+            .pagelink{
                 display: flex;
             }
             .pagination-drop{
@@ -198,11 +166,6 @@ include 'connection.php';
                 
             }
         </style> 
-
-
-
-
-
     </body>
 </html>
 
