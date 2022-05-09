@@ -15,7 +15,7 @@ include 'connection.php';
     <body>
 
         <?php
-        $records = mysqli_query($conn, "SELECT count(*) FROM tbluser ORDER BY id ASC");
+        $records = mysqli_query($conn, "SELECT count(*) FROM tableuser ORDER BY id ASC");
         $row_db = mysqli_fetch_row($records);
         $total_records = $row_db[0];
         ?>
@@ -44,6 +44,9 @@ include 'connection.php';
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
                             <th scope="col">Gender</th>
+                            <th scope="col">Division</th>
+                            <th scope="col">District</th>
+                            <th scope="col">Thana</th>
                             <th scope="col">Email</th>
                             <th scope="col">Password</th>
                             <th scope="col">Operation</th>
@@ -74,28 +77,44 @@ include 'connection.php';
                         $start_page = ($page - 1) * $numberOfRecordsPerPage;
                         $offsetStr = !empty($start_page) ? ' offset '.$start_page : '';
                         
-                        $query = "SELECT * FROM tbluser ORDER BY id ASC LIMIT ".$numberOfRecordsPerPage. $offsetStr;
+                        $query = "SELECT * FROM tableuser ORDER BY id ASC LIMIT ".$numberOfRecordsPerPage. $offsetStr;
                         
                         $result = mysqli_query($conn, $query);
 
                         if (mysqli_num_rows($result) > 0) {
                             $serial = $start_page;
                             while ($row = mysqli_fetch_assoc($result)) {
-
+                                
+                              $divisionSql="select name from division where id=" .$row['division_id'];
+                              $divisionresult=mysqli_query($conn,$divisionSql);
+                              $row2= mysqli_fetch_assoc($divisionresult);
+                              
+                              $districtSql="select name from district where id=" .$row['district_id'];
+                              $districtresult=mysqli_query($conn,$districtSql);
+                              $row3= mysqli_fetch_assoc($districtresult);
+                              
+                              $thanaSql="select name from thana where id=" .$row['thana_id'];
+                              $thanaresult=mysqli_query($conn,$thanaSql);
+                              $row4= mysqli_fetch_assoc($thanaresult);
+                                
+                                //$id = $row['id'];
                                 $firstName = $row['firstName'];
                                 $lastName = $row['lastName'];
                                 $gender = $row['gender'];
                                 $email = $row['email'];
                                 $password = $row['password'];
-
+                                $status=$row['status'];
                                 echo ' <tr>
                   <th scope="row">' . ++$serial . '</th>
         <td>' . $firstName . '</td>
         <td>' . $lastName . '</td>
         <td>' . $gender . '</td>
+        <td>' . $row2['name'] . '</td>
+        <td>' . $row3['name'] . '</td>
+        <td>' . $row4['name'] . '</td>
         <td>' . $email . '</td>
         <td>' . $password . '</td>
-        
+       
         <td>
         <button class="btn btn-primary"><a href="update.php?updateid=' . $row['id'] . '" class="text-light">Update</a></button>
         <button class="btn btn-danger"><a href="delete.php?deleteid=' . $row['id'] . '" class="text-light">Delete</a></button>
