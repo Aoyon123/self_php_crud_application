@@ -29,7 +29,7 @@ include 'connection.php';
   
     $start_from = ($pn-1) * $limit;  
   
-    $sql2 = "SELECT * FROM tbluser LIMIT $start_from, $limit";  
+    $sql2 = "SELECT * FROM tableuser LIMIT $start_from, $limit";  
     $result = mysqli_query ($conn,$sql2); 
   
   ?>
@@ -69,7 +69,7 @@ include 'connection.php';
       </table>
       <ul class="pagination">
       <?php  
-        $sql = "SELECT COUNT(*) FROM tbluser";  
+        $sql = "SELECT COUNT(*) FROM tableuser";  
         $result = mysqli_query($conn,$sql);  
         $row = mysqli_fetch_row($result);  
         $total_records = $row[0];  
